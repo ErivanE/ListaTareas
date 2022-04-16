@@ -1,13 +1,8 @@
 /*
-			0.3 
-	implementando funciones
-		Imprimir
-		pausa
-		limpiarPantalla
-	se movieron los case a funciones.
-		EliminarTarea
-		AgregarTarea
-		MostrarTareas
+			0.4
+	Al momento de eliminar una tarea, las tareas siguientes a la que se elimina se recorren un lugar.
+	
+		
 */
 #ifdef _WIN32
 	#include <windows.h>
@@ -28,6 +23,8 @@ void mostrarTareas();
 void agregarTarea();
 void pausa();
 void reiniciarCin();
+class Tarea;
+
 
 
 int main(){
@@ -69,6 +66,8 @@ int main(){
 	return 0;
 }
 
+
+
 void limpiarPantalla(){
 	#ifdef _WIN32
 		system("cls");
@@ -97,10 +96,22 @@ void agregarTarea(){
 	cantidadTareas++;
 }
 void eliminarTarea(){
+	string temp;
 	imprimir("Tarea a eliminar?: ");
 	cin>>tareaSeleccionada;
 	reiniciarCin();
+	
 	tarea[tareaSeleccionada-1] = "";
+	for(int i=tareaSeleccionada-1;i<10;i++){
+		if(i==9)break;
+		temp = tarea[i];
+		tarea[i] = tarea[i+1];
+		tarea[i+1] = temp;
+	}
 	imprimir("Tarea Eliminada.");
 }
+
+class Tarea{
+	
+};
 
